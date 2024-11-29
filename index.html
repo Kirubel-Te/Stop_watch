@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stop Watch</title>
+    <link rel="stylesheet" href="css/style.css"/>
+</head>
+<body>
+    <div class="nav-bar">
+        <ul>
+            <li>
+                <a href="#">Alarm</a>
+            </li>
+            <li>
+                <a href="#">World Clock</a>
+            </li>
+            <li>
+                <a href="#stopwatch">Stopwatch</a>
+            </li>
+            <li>
+                <a href="#">Timer</a>
+            </li>
+        </ul>
+    </div>
+    <div id="stopwatch" class="stopwatch">
+        <div class="trackers">
+            <div class="lap-button" id="lap">
+                <button class="lap">Lap</button>
+            </div>
+            <div >
+                <button class="start">Start</button>
+            </div>
+        </div>
+        <div class="score"></div>
+        <div class="count">
+            <h1><span class="s1">0</span><span class="s2">0</span>:<span class="s3">0</span><span class="s4">0</span>.<span class="s5">0</span><span class="s6">0</span></h1>
+        </div>
+    </div>
+    <script src="js/jquery-3.7.1.js"></script>
+    <script src="js/scripts.js"></script>
+</body>
+</html>
