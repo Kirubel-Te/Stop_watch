@@ -1,158 +1,111 @@
 $(document).ready(function(){
-    let count=1,count1=0,count2=1,count3=0,count4=1,count5 = 0;
-    let Interval,Interval1,Interval2,Interval3,Interval4,Interval5;
-    let pausedTime = {
+  
+    let ETime = {
         centi: 0, sec: 0, min: 0
     }
-    let remainingTime = {
+    let LTime = {
         centi: 0, sec: 0, min: 0
     }
+    let totalE = 0, totalL = 0;
+    let Interval;
+    let count = 0;
+    let template;
+    function Lapnotification(message, duration = 3000){
+        $notification = $("#notification");
+        $notification.text(message).fadeIn();
+        setTimeout(() => {
+            $notification.fadeOut()
+        },duration);
+    }
+    $(".lap-button button").addClass("opah");
     $(".start").click(function(){
         if($(this).text() === "Start"|| $(this).text() === "Resume"){
+            if(count < 6){
+                $(".lap-button button").removeClass("opah");
+            }
+            else{
+                $(".lap-button button").removeClass("opa1");
+                $(".lap-button button").addClass("opah");
+            }
             $(this).text("Stop");
             $(this).addClass("stop-button");
             $(this).removeClass("start-button");
-            $(".lap-button button").css("cssText","opacity: 1 !important;");
-            $(".lap-button button").text("Lap")
+            $(".lap-button button").text("Lap");
 
             clearInterval(Interval);
-            clearInterval(Interval2);
-            clearInterval(Interval4);
 
-            count = pausedTime.centi;
-            count2 = pausedTime.sec;
-            count4 = pausedTime.min;
-            let startTime = new Date().getTime();
-            if(remainingTime.centi > 0){
-                setTimeout(() => {
-                    count++;
-                    if(count > 99){
-                        count = 0;
-                    }
-                    $(".s6").text(count.toString().padStart(2,'0'));
-                    //remainingTime.centi = 0;
-                    Interval = setInterval(() => {
-                        count++;
-                        if(count > 99){
-                            count = 0;
-                        }
-                        $(".s6").text(count.toString().padStart(2,'0'));
-                    },10)
-                },remainingTime.centi);
-            }
-            else{
-                Interval = setInterval(() => {
-                    count++;
-                    if(count > 99){
-                        count = 0;
-                    }
-                    $(".s6").text(count.toString().padStart(2,'0'));
-                },10);
-            }
-            if(remainingTime.sec > 0){
-                setTimeout(() => {
-                    count2++;
-                    if(count2 > 59){
-                        count2 = 0;
-                        //count4++;
-                    }
-                    $(".s4").text(count2.toString().padStart(2,'0'));
-                    //remainingTime.sec=0;
-                    Interval2 = setInterval(() => {
-                        count2++;
-                        if(count > 59){
-                            count2 = 0;
-                            //count4++;
-                        }
-                        $(".s4").text(count2.toString().padStart(2,'0'));
-                    },1000);
-                },remainingTime.sec)
-            }
-            else{
-                Interval2 = setInterval(() => {
-                    count2++;
-                    if(count2 > 59){
-                        count2 = 0;
-                        //count4++;
-                    }
-                    $(".s4").text(count2.toString().padStart(2,'0'));
-                   // count2++;
-                    
-                },1000);
-            }
-
-            if(remainingTime.min > 0){
-                setTimeout(() => {
-                    count4++;
-                    if(count4 > 59){
-                        count4 = 0;
-                    }
-                    $(".s2").text(count4.toString().padStart(2,'0'));
-                    //remainingTime.min = 0;
-                    Interval4 = setInterval(() => {
-                        count4++;
-                        if(count4 > 59){
-                            count4 = 0;
-                        }
-                        $(".s2").text(count4.toString().padStart(2,'0'));
-                    },60000)
-                },remainingTime.min)
-            }
-            else{
-                Interval4 = setInterval(() => {
-                    count4++;
-                    if(count4 > 59){
-                        count4 = 0;
-                    }
-                    $(".s2").text(count4.toString().padStart(2,'0'));
-      
-                },60000);
-            }
-            
+            Interval = setInterval(() => {
+                ETime.centi++;
+                if(ETime.centi > 99){
+                    ETime.centi = 0;
+                    ETime.sec++
+                }
+                if(ETime.sec > 59){
+                    ETime.sec = 0;
+                    ETime.min++;
+                }
+                $(".s6").text(ETime.centi.toString().padStart(2,'0'));
+                $(".s4").text(ETime.sec.toString().padStart(2,'0'));
+                $(".s2").text(ETime.min.toString().padStart(2,'0'));
+                
+            },10);
         }
         else if($(this).text() === "Stop"){
             $(this).text("Resume");
             $(this).addClass("start-button");
             $(this).removeClass("stop-button");
             $(".lap-button button").text("Reset");
-            
-            pausedTime.centi = count;
-            pausedTime.sec = count2;
-            pausedTime.min = count4
-
-            let endTime = new Date().getMilliseconds();
-
+            if(count <= 6 && $(".lap-button button").text() === "Reset"){
+                $(".lap-button button").removeClass("opah");
+                $(".lap-button button").addClass("opa1");
+            }
             clearInterval(Interval);
-            clearInterval(Interval2);
-            clearInterval(Interval4);
-            
-            let currentTime = new Date().getTime - startTime;
-
-            remainingTime.centi = 10 - Math.round(currentTime%10);
-            remainingTime.sec = 1000 - Math.round(current%1000)
-            remainingTime.min = 60000 - Math.round(currentTime%60000);
         }
-
-
-
     })
     $(".lap").click(function(){
         if($(".start").text() !="Start" && $(this).text() === "Lap"){
+            $(".score").css("cssText","display: block !important;")
+            count++;
+            if(count < 7){
+                totalE = (ETime.min*6000) + (ETime.sec*100) + ETime.centi;
+                totalL = totalE - totalL;
+                LTime.min = Math.floor(totalL/6000);
+                remainingsecond = totalL%6000;
+                LTime.sec = Math.floor(remainingsecond/100);
+                LTime.centi = remainingsecond % 100;
+                $(".score").append(`<ul>
+                    <li>${count.toString().padStart(2,'0')}</li>
+                    <li>${LTime.min.toString().padStart(2,'0')}:${LTime.sec.toString().padStart(2,'0')}.${LTime.centi.toString().padStart(2,'0')}</li>
+                    <li>${ETime.min.toString().padStart(2,'0')}:${ETime.sec.toString().padStart(2,'0')}.${ETime.centi.toString().padStart(2,'0')}</li>`)
+                totalL = totalE;
+                $(".score ul").addClass("lap-start");
+                $(".score ul li").addClass("lap-list");
 
+            }
+            if(count==6){
+                $(".lap-button button").removeClass("opa1");
+                $(".lap-button button").addClass("opah")
+                Lapnotification("Reached the maximum amount of lap")
+            }
         }
         else if($(this).text() === "Reset"){
             $(".lap-button button").text("Lap");
-            $(".lap-button button").css("cssText","opacity: 0.5 !important;");
+            $(".lap-button button").removeClass("opa1");
+            $(".lap-button button").addClass("opah");
             $(".start").text("Start");
             $(".s6").text("00");
-            $(".s5").text("0");
             $(".s4").text("00");
-            $(".s3").text("0");
             $(".s2").text("00");
-            $(".s1").text("0");
-            count = count2 = count4 = 1;
-            pausedTime = {centi: 0, sec: 0, min: 0};
-            remainingTime = {centi:0, sec: 0, min: 0};
+            $(".score").css("cssText","display: none !important;")
+            ETime = {centi:0, sec: 0, min: 0};
+            LTime = {centi:0 , sec: 0, min: 0};
+            count = 0;
+            template = $(".score").find(".lap-title");
+            $(".score").empty();
+            $(".score").append(template);
+            $(".lap-title").addClass("lap-start");
+            $(".score ul li").addClass("lap-list");
+            $(".score").append("<hr/>");
         }
     })
 })
