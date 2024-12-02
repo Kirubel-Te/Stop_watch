@@ -100,6 +100,8 @@ $(document).ready(function(){
             ETime = {centi:0, sec: 0, min: 0};
             LTime = {centi:0 , sec: 0, min: 0};
             count = 0;
+            totalE = 0;
+            totalL = 0;
             template = $(".score").find(".lap-title");
             $(".score").empty();
             $(".score").append(template);
