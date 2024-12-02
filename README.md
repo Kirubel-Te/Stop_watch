@@ -16,7 +16,7 @@ This repository contains a **Stopwatch Web Application** implemented using **HTM
 
 ## Demo
 
-A visual demo of the application will be added here (if applicable).
+Check out the live demo [here](https://Kirubel-Te.github.io/Stop_watch).
 
 ---
 
@@ -24,12 +24,12 @@ A visual demo of the application will be added here (if applicable).
 
 1. Clone this repository:
    ```bash
-   git clone https://github.com/yourusername/stopwatch-app.git
+   git clone https://github.com/Kirubel-Te/Stop_watch.git
    ```
 
 2. Navigate to the project directory:
    ```bash
-   cd stopwatch-app
+   cd Stop_watch
    ```
 
 3. Open the `index.html` file in your browser:
@@ -69,8 +69,8 @@ A visual demo of the application will be added here (if applicable).
 ```
 /stopwatch-app
 ├── index.html          # Main HTML file
-├── style.css           # Stylesheet (if applicable)
-├── script.js           # JavaScript logic (the code provided above)
+├── style.css           # Stylesheet 
+├── script.js           # JavaScript 
 └── README.md           # Project documentation
 ```
 
@@ -109,7 +109,7 @@ A visual demo of the application will be added here (if applicable).
 - **jQuery**: Ensure jQuery is included in your project. You can use the following CDN:
 
   ```html
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
   ```
 
 ---
